@@ -1,6 +1,6 @@
 class ClosedPolicy
   attr_reader :context, :resource, :user
-  alias_method :scope, :resource # for when the policy is initialised with a scope to be resolved 
+  alias_method :scope, :resource # for when the policy is initialised with a scope to be resolved
 
   def initialize(context, resource=nil, user=nil)
     @context = context
@@ -8,7 +8,7 @@ class ClosedPolicy
 
     raise Pundit::NotAuthorizedError unless @user
 
-    @resource = resource || context.resource
+    @resource = resource || context.send(:resource)
   end
 
   def resolve
